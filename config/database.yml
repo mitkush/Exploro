@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  port: <%= ENV['POSTGRES_PORT'] || "5432" %>
+  host: <%= ENV['POSTGRES_HOST'] || "localhost"%>
+
+development:
+  <<: *default
+  database: "exploro_dev"
+  username: <%= ENV['POSTGRES_USER'] || "postgres" %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || "postgres" %>
+
+test:
+  <<: *default
+  database: exploro_test
+  username: <%= ENV['POSTGRES_USER'] || "postgres" %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || "postgres" %>
+
+production:
+  <<: *default
+  database: <%= ENV['POSTGRES_DB']%>
+  username: <%= ENV['POSTGRES_USER']%>
+  password: <%= ENV['POSTGRES_PASSWORD']%>
